@@ -34,3 +34,23 @@ func TestAuthRepository_CreateUser(t *testing.T) {
 	err = mock.ExpectationsWereMet()
 	assert.NoError(t, err)
 }
+
+func TestAuthRepository_GetUser(t *testing.T) {
+	db, mock, _ := sqlmock.New()
+	defer db.Close()
+	sqlxDB := sqlx.NewDb(db, "postgres")
+	repo := repository.NewAuthDB(sqlxDB)
+
+	mock.ExpectQuery("SELECT id, password FROM users").
+		WithArgs("testuser").
+		WillReturnRows(sqlmock.NewRows([]string{"id", "password"}).
+			AddRow(1, "password"))
+
+	user, err := repo.GetUser("testuser")
+	assert.NoError(t, err)
+	assert.Equal(t, 1, user.Id)
+	assert.Equal(t, "password", user.Password)
+
+	err = mock.ExpectationsWereMet()
+	assert.NoError(t, err)
+}
