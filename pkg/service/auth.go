@@ -54,6 +54,7 @@ func (s *AuthService) GetUser(login, password string, c *gin.Context) {
 			"error": "Invalid password",
 		})
 		fmt.Print(err)
+		return
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{

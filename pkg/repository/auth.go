@@ -29,7 +29,7 @@ func (r *AuthDB) CreateUser(user models.User) (int, error) {
 
 func (r *AuthDB) GetUser(login string) (models.User, error) {
 	var user models.User
-	query := fmt.Sprintf("SELECT id FROM %s WHERE login=$1", usersTable)
+	query := fmt.Sprintf("SELECT id, password FROM %s WHERE login=$1", usersTable)
 	err := r.db.Get(&user, query, login)
 
 	return user, err
