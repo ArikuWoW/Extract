@@ -48,3 +48,12 @@ func (r *PostDB) GetAllPostsByUserId(userId int) ([]models.Post, error) {
 
 	return posts, err
 }
+
+func (r *PostDB) GetPostById(userId, postId int) (models.Post, error) {
+	var post models.Post
+
+	query := fmt.Sprintf("SELECT p.id, p.id, p.content, p.create_at, p.likes, p.dislikes FROM %s p INNER JOIN %s u on p.id = u.post_id WHERE u.user_id = $1 AND u.post_id = $2", postsTable, userPostsTable)
+	err := r.db.Get(&post, query, userId, postId)
+
+	return post, err
+}

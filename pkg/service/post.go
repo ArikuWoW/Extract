@@ -20,3 +20,7 @@ func (s *PostService) CreatePost(userId int, post models.Post) (int, error) {
 func (s *PostService) GetAllPostsByUserId(userId int) ([]models.Post, error) {
 	return s.repo.GetAllPostsByUserId(userId)
 }
+
+func (s *PostService) GetPostById(userId, postId int) (models.Post, error) {
+	return s.repo.GetPostById(userId, postId)
+}
