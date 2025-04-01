@@ -74,3 +74,26 @@ func (h *Handler) getPostById(c *gin.Context) {
 
 	c.JSON(http.StatusOK, post)
 }
+
+func (h *Handler) DeletePost(c *gin.Context) {
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
+
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	err = h.service.Post.DeletePost(userId, id)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
+	})
+}

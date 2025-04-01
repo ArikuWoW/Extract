@@ -57,3 +57,10 @@ func (r *PostDB) GetPostById(userId, postId int) (models.Post, error) {
 
 	return post, err
 }
+
+func (r *PostDB) DeletePost(userId, postId int) error {
+	query := fmt.Sprintf("DELETE FROM %s p USING %s u WHERE p.id = u.post_id AND u.user_id=$1 AND u.post_id=$2", postsTable, userPostsTable)
+
+	_, err := r.db.Exec(query, userId, postId)
+	return err
+}
