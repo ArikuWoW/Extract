@@ -38,14 +38,27 @@ type getAllPostsResp struct {
 }
 
 func (h *Handler) getAllPosts(c *gin.Context) {
-	userId, err := getUserId(c)
+	currentUserId, err := getUserId(c)
 	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})
 		return
 	}
 
-	posts, err := h.service.Post.GetAllPostsByUserId(userId)
+	var authorId int
+	authorIdStr := c.Query("author_id")
+	if authorIdStr == "" {
+		authorId = currentUserId
+	} else {
+		authorId, err = strconv.Atoi(authorIdStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "invalid author_id"})
+			return
+		}
+	}
+
+	posts, err := h.service.Post.GetAllPostsByUserId(authorId)
 	if err != nil {
-		fmt.Println(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "cannot fetch posts"})
 		return
 	}
 
