@@ -11,8 +11,8 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    like INTEGER DEFAULT 0,
-    dislike INTEGER DEFAULT 0
+    likes INTEGER DEFAULT 0,
+    dislikes INTEGER DEFAULT 0
 );
 
 CREATE TABLE comments (

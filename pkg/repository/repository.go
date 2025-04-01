@@ -11,6 +11,7 @@ type Authorization interface {
 }
 
 type Post interface {
+	CreatePost(userId int, post models.Post) (int, error)
 }
 
 type Comment interface {
@@ -25,5 +26,6 @@ type Repository struct {
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthDB(db),
+		Post:          NewPostDB(*db),
 	}
 }

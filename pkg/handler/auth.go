@@ -39,7 +39,7 @@ type loginInput struct {
 func (h *Handler) Login(c *gin.Context) {
 	var input loginInput
 	if err := c.BindJSON(&input); err != nil {
-		logrus.Errorf("Error:", err)
+		logrus.Error("Error:", err)
 		return
 	}
 	h.service.Authorization.GetUser(input.Login, input.Password, c)
