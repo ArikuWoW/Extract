@@ -17,6 +17,7 @@ type Post interface {
 	GetAllPostsByUserId(userId int) ([]models.Post, error)
 	GetPostById(userId, postId int) (models.Post, error)
 	DeletePost(userId, postId int) error
+	UpdatePost(userId, postId int, input models.UpdatePostInput) error
 }
 
 type Comment interface {

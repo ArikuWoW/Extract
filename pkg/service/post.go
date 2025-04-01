@@ -28,3 +28,7 @@ func (s *PostService) GetPostById(userId, postId int) (models.Post, error) {
 func (s *PostService) DeletePost(userId, postId int) error {
 	return s.repo.DeletePost(userId, postId)
 }
+
+func (s *PostService) UpdatePost(userId, postId int, input models.UpdatePostInput) error {
+	return s.repo.UpdatePost(userId, postId, input)
+}

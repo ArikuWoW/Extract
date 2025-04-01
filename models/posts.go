@@ -28,3 +28,7 @@ type PostComment struct {
 	CommentId int
 	UserId    int
 }
+
+type UpdatePostInput struct {
+	Content *string `json:"content"`
+}

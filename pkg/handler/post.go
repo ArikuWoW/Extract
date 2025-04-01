@@ -97,3 +97,31 @@ func (h *Handler) DeletePost(c *gin.Context) {
 		"status": "ok",
 	})
 }
+
+func (h *Handler) updatePost(c *gin.Context) {
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
+
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	var input models.UpdatePostInput
+	if err := c.BindJSON(&input); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	if err := h.service.Post.UpdatePost(userId, id, input); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"Status": "ok",
+	})
+}

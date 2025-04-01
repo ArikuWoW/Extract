@@ -64,3 +64,10 @@ func (r *PostDB) DeletePost(userId, postId int) error {
 	_, err := r.db.Exec(query, userId, postId)
 	return err
 }
+
+func (r *PostDB) UpdatePost(userId, postId int, input models.UpdatePostInput) error {
+	query := fmt.Sprintf("UPDATE %s SET content=$1 WHERE id=$2", postsTable)
+
+	_, err := r.db.Exec(query, input.Content, postId)
+	return err
+}
