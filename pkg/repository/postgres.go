@@ -9,11 +9,11 @@ import (
 )
 
 const (
-	usersTable   = "users"
-	posts        = "posts"
-	userPosts    = "user_posts"
-	comments     = "comments"
-	postComments = "post_comments"
+	usersTable     = "users"
+	postsTable     = "posts"
+	userPostsTable = "user_posts"
+	comments       = "comments"
+	postComments   = "post_comments"
 )
 
 type Config struct {

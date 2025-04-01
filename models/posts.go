@@ -3,11 +3,11 @@ package models
 import "time"
 
 type Post struct {
-	Id        int       `json:"id"`
-	Content   string    `json:"content" binding:"required"`
-	Create_at time.Time `json:"create_at"`
-	Like      int       `json:"like"`
-	Dislike   int       `json:"dislike"`
+	Id        int       `json:"id" db:"id"`
+	Content   string    `json:"content" binding:"required" db:"content"`
+	Create_at time.Time `json:"create_at" db:"create_at"`
+	Like      int       `json:"like" db:"likes"`
+	Dislikes  int       `json:"dislike" db:"dislikes"`
 }
 
 type UserPost struct {

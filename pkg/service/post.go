@@ -16,3 +16,7 @@ func NewPostService(repo repository.Post) *PostService {
 func (s *PostService) CreatePost(userId int, post models.Post) (int, error) {
 	return s.repo.CreatePost(userId, post)
 }
+
+func (s *PostService) GetAllPostsByUserId(userId int) ([]models.Post, error) {
+	return s.repo.GetAllPostsByUserId(userId)
+}

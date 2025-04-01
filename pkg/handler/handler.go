@@ -25,6 +25,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	posts := router.Group("/post", h.userIdentity)
 	{
 		posts.POST("/createPost", h.createPost)
+		posts.GET("/getAllPosts", h.getAllPosts)
 	}
 
 	return router
